@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter, DrawerClose } from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter } from "@/components/ui/drawer";
 import { Plus, Search, Pencil, Trash2 } from "lucide-react";
 import TableSkeleton from "@/components/TableSkeleton";
 
@@ -158,9 +158,7 @@ export default function CompaniesPage() {
             </div>
             <DrawerFooter>
               <Button type="submit" disabled={loading}>{loading ? "Saving..." : editTarget ? "Update Company" : "Add Company"}</Button>
-              <DrawerClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
+              <Button variant="outline" type="button" onClick={() => setOpen(false)}>Cancel</Button>
             </DrawerFooter>
           </form>
         </DrawerContent>

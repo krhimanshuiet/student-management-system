@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter, DrawerClose } from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter } from "@/components/ui/drawer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Search, Pencil, Trash2 } from "lucide-react";
 import TableSkeleton from "@/components/TableSkeleton";
@@ -152,7 +152,7 @@ export default function ResultsPage() {
               {error && <p className="text-sm text-destructive">{error}</p>}
               <div className="space-y-1.5">
                 <Label>Student</Label>
-                <Select value={form.studentId} onValueChange={v => setForm({ ...form, studentId: v })}>
+                <Select value={form.studentId} onValueChange={v => setForm({ ...form, studentId: v ?? "" })}>
                   <SelectTrigger><SelectValue placeholder="Select student" /></SelectTrigger>
                   <SelectContent>
                     {students.map(s => <SelectItem key={s.id} value={String(s.id)}>{s.name} ({s.rollNo})</SelectItem>)}
@@ -174,7 +174,7 @@ export default function ResultsPage() {
                 </div>
                 <div className="space-y-1.5">
                   <Label>Grade</Label>
-                  <Select value={form.grade} onValueChange={v => setForm({ ...form, grade: v })}>
+                  <Select value={form.grade} onValueChange={v => setForm({ ...form, grade: v ?? "" })}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
                       {["A+", "A", "B+", "B", "C", "D", "F"].map(g => <SelectItem key={g} value={g}>{g}</SelectItem>)}
@@ -185,7 +185,7 @@ export default function ResultsPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <Label>Semester</Label>
-                  <Select value={form.semester} onValueChange={v => setForm({ ...form, semester: v })}>
+                  <Select value={form.semester} onValueChange={v => setForm({ ...form, semester: v ?? "" })}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
                       {[1, 2, 3, 4, 5, 6].map(n => <SelectItem key={n} value={String(n)}>Semester {n}</SelectItem>)}
@@ -200,9 +200,7 @@ export default function ResultsPage() {
             </div>
             <DrawerFooter>
               <Button type="submit" disabled={loading}>{loading ? "Saving..." : editTarget ? "Update Result" : "Add Result"}</Button>
-              <DrawerClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
+              <Button variant="outline" type="button" onClick={() => setOpen(false)}>Cancel</Button>
             </DrawerFooter>
           </form>
         </DrawerContent>

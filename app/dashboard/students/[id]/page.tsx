@@ -25,9 +25,7 @@ export default async function StudentDetailPage({ params }: { params: Promise<{ 
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-4">
-        <Button variant="ghost" size="sm" asChild>
-          <Link href="/dashboard/students"><ArrowLeft className="w-4 h-4 mr-1" />Back</Link>
-        </Button>
+        <Link href="/dashboard/students" className="inline-flex items-center text-sm font-medium rounded-md px-3 h-8 hover:bg-accent hover:text-accent-foreground transition-colors"><ArrowLeft className="w-4 h-4 mr-1" />Back</Link>
         <div>
           <h1 className="text-2xl font-bold tracking-tight">{student.name}</h1>
           <p className="text-muted-foreground text-sm">{student.rollNo} · {student.course} Year {student.year}</p>

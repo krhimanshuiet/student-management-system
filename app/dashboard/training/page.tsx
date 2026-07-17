@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter, DrawerClose } from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter } from "@/components/ui/drawer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Plus, Search, Pencil, Trash2 } from "lucide-react";
@@ -154,7 +154,7 @@ export default function TrainingPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
                   <Label>Student</Label>
-                  <Select value={form.studentId} onValueChange={v => setForm({ ...form, studentId: v })}>
+                  <Select value={form.studentId} onValueChange={v => setForm({ ...form, studentId: v ?? "" })}>
                     <SelectTrigger><SelectValue placeholder="Select student" /></SelectTrigger>
                     <SelectContent>
                       {students.map(s => <SelectItem key={s.id} value={String(s.id)}>{s.name} ({s.rollNo})</SelectItem>)}
@@ -163,7 +163,7 @@ export default function TrainingPage() {
                 </div>
                 <div className="space-y-1.5">
                   <Label>Company</Label>
-                  <Select value={form.companyId} onValueChange={v => setForm({ ...form, companyId: v })}>
+                  <Select value={form.companyId} onValueChange={v => setForm({ ...form, companyId: v ?? "" })}>
                     <SelectTrigger><SelectValue placeholder="Select company" /></SelectTrigger>
                     <SelectContent>
                       {companies.map(c => <SelectItem key={c.id} value={String(c.id)}>{c.name}</SelectItem>)}
@@ -187,7 +187,7 @@ export default function TrainingPage() {
               </div>
               <div className="space-y-1.5">
                 <Label>Status</Label>
-                <Select value={form.status} onValueChange={v => setForm({ ...form, status: v })}>
+                <Select value={form.status} onValueChange={v => setForm({ ...form, status: v ?? "" })}>
                   <SelectTrigger><SelectValue /></SelectTrigger>
                   <SelectContent>
                     <SelectItem value="Ongoing">Ongoing</SelectItem>
@@ -202,9 +202,7 @@ export default function TrainingPage() {
             </div>
             <DrawerFooter>
               <Button type="submit" disabled={loading}>{loading ? "Saving..." : editTarget ? "Update Training" : "Add Training"}</Button>
-              <DrawerClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
+              <Button variant="outline" type="button" onClick={() => setOpen(false)}>Cancel</Button>
             </DrawerFooter>
           </form>
         </DrawerContent>

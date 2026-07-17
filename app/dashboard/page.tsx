@@ -10,7 +10,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import { GraduationCap, Building2, BookOpen, BarChart3 } from "lucide-react";
 
 export default async function DashboardPage() {
@@ -62,9 +61,7 @@ export default async function DashboardPage() {
       <Card>
         <CardHeader className="flex flex-row items-center justify-between">
           <CardTitle className="text-base">Recent Students</CardTitle>
-          <Button variant="ghost" size="sm" asChild>
-            <Link href="/dashboard/students">View all</Link>
-          </Button>
+          <Link href="/dashboard/students" className="inline-flex items-center justify-center text-sm font-medium rounded-md px-3 h-8 hover:bg-accent hover:text-accent-foreground transition-colors">View all</Link>
         </CardHeader>
         <CardContent className="p-0">
           <Table>

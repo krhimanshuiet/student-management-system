@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter, DrawerClose } from "@/components/ui/drawer";
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerFooter } from "@/components/ui/drawer";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Search, Pencil, Trash2, Eye } from "lucide-react";
 import TableSkeleton from "@/components/TableSkeleton";
@@ -108,9 +108,7 @@ export default function StudentsPage() {
                   <TableCell className="text-muted-foreground">Year {s.year}</TableCell>
                   <TableCell className="text-right">
                     <div className="flex items-center justify-end gap-1">
-                      <Button variant="ghost" size="icon" asChild>
-                        <Link href={`/dashboard/students/${s.id}`}><Eye className="w-4 h-4" /></Link>
-                      </Button>
+                      <Link href={`/dashboard/students/${s.id}`} className="inline-flex items-center justify-center rounded-md w-8 h-8 hover:bg-accent hover:text-accent-foreground transition-colors"><Eye className="w-4 h-4" /></Link>
                       <Button variant="ghost" size="icon" onClick={() => openEdit(s)}>
                         <Pencil className="w-4 h-4" />
                       </Button>
@@ -172,7 +170,7 @@ export default function StudentsPage() {
                 </div>
                 <div className="space-y-1.5">
                   <Label>Year</Label>
-                  <Select value={form.year} onValueChange={v => setForm({ ...form, year: v })}>
+                  <Select value={form.year} onValueChange={v => setForm({ ...form, year: v ?? "" })}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="1">Year 1</SelectItem>
@@ -185,9 +183,7 @@ export default function StudentsPage() {
             </div>
             <DrawerFooter>
               <Button type="submit" disabled={loading}>{loading ? "Saving..." : editTarget ? "Update Student" : "Add Student"}</Button>
-              <DrawerClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DrawerClose>
+              <Button variant="outline" type="button" onClick={() => setOpen(false)}>Cancel</Button>
             </DrawerFooter>
           </form>
         </DrawerContent>
