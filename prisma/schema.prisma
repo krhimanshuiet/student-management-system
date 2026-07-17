@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id        Int      @id @default(autoincrement())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model Student {
+  id        Int        @id @default(autoincrement())
+  rollNo    String     @unique
+  name      String
+  email     String
+  phone     String
+  address   String
+  course    String
+  year      Int
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  trainings Training[]
+  results   Result[]
+}
+
+model Company {
+  id            Int        @id @default(autoincrement())
+  name          String     @unique
+  industry      String
+  location      String
+  contactPerson String
+  email         String
+  phone         String
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @updatedAt
+  trainings     Training[]
+}
+
+model Training {
+  id          Int      @id @default(autoincrement())
+  studentId   Int
+  companyId   Int
+  projectName String
+  startDate   DateTime
+  endDate     DateTime
+  status      String   @default("Ongoing")
+  description String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  student     Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+}
+
+model Result {
+  id        Int      @id @default(autoincrement())
+  studentId Int
+  subject   String
+  marks     Int
+  maxMarks  Int
+  grade     String
+  semester  Int
+  year      Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  student   Student  @relation(fields: [studentId], references: [id], onDelete: Cascade)
+}
