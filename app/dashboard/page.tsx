@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import type { Student } from "@prisma/client";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -20,7 +21,7 @@ export default async function DashboardPage() {
     prisma.result.count(),
   ]);
 
-  const recentStudents = await prisma.student.findMany({
+  const recentStudents: Student[] = await prisma.student.findMany({
     orderBy: { createdAt: "desc" },
     take: 5,
   });
