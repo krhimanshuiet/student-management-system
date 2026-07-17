@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
-import type { Student } from "@prisma/client";
+import type { Prisma } from "@prisma/client";
+type Student = Prisma.StudentGetPayload<object>;
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
