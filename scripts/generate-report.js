@@ -67,25 +67,19 @@ function buildHTML(shots) {
   .page:last-child { page-break-after: avoid; }
 
   /* Cover */
-  .cover { display:flex; flex-direction:column; align-items:center; text-align:center; justify-content:space-between; padding:4mm 0 6mm; border-bottom:2px solid #000; margin-bottom:8px; }
-  .cover img { width:66px; height:66px; object-fit:contain; }
-  .cover .inst { font-size:12pt; font-weight:bold; text-transform:uppercase; margin-top:4px; }
+  .cover { display:flex; flex-direction:column; align-items:center; text-align:center; justify-content:space-between; min-height:240mm; padding:4mm 0; }
+  .cover img { width:72px; height:72px; object-fit:contain; }
+  .cover .inst { font-size:13pt; font-weight:bold; text-transform:uppercase; margin-top:5px; }
   .cover .addr { font-size:9pt; margin-top:1px; }
-  .cover .dept-line { font-size:10pt; font-weight:bold; margin-top:3px; text-transform:uppercase; }
+  .cover .dept-line { font-size:10pt; font-weight:bold; margin-top:4px; text-transform:uppercase; }
   .cover .report-on { font-size:11pt; margin-top:6px; }
-  .cover .topic { font-size:13pt; font-weight:bold; text-transform:uppercase; border-top:2px solid #000; border-bottom:2px solid #000; padding:5px 12px; margin:6px 0; }
+  .cover .topic { font-size:14pt; font-weight:bold; text-transform:uppercase; border-top:2px solid #000; border-bottom:2px solid #000; padding:5px 14px; margin:6px 0; }
   .cover .partial { font-size:9.5pt; max-width:360px; line-height:1.5; }
   .cover .degree { font-size:11pt; font-weight:bold; margin-top:4px; }
   .cover .submit-wrap { display:flex; justify-content:space-between; width:100%; text-align:left; font-size:9.5pt; gap:16px; margin-top:6px; }
   .cover .submit-wrap h4 { font-size:10pt; font-weight:bold; text-decoration:underline; margin-bottom:4px; }
-  .cover .submit-wrap p { margin:1px 0; line-height:1.5; }
-  .cover .footer { font-size:9.5pt; font-weight:bold; line-height:1.7; text-align:center; border-top:1px solid #000; padding-top:6px; width:100%; margin-top:6px; }
-  /* Declaration inline */
-  .decl-title { font-size:13pt; font-weight:bold; text-align:center; text-decoration:underline; text-transform:uppercase; margin:6px 0 8px; letter-spacing:1px; }
-  .decl p { font-size:10pt; line-height:1.6; margin-bottom:6px; text-align:justify; }
-  .decl .sr { padding:3px 0; font-size:10pt; }
-  .decl .meta { font-size:10pt; margin-top:4px; }
-  .decl .sup-line { border-top:1px solid #000; padding-top:4px; max-width:180px; font-size:10pt; margin-top:16px; }
+  .cover .submit-wrap p { margin:1px 0; line-height:1.45; }
+  .cover .footer { font-size:9.5pt; font-weight:bold; line-height:1.7; text-align:center; border-top:1px solid #000; padding-top:6px; width:100%; }
 
   /* Formal pages */
   .ptitle { font-size:16pt; font-weight:bold; text-align:center; text-decoration:underline; text-transform:uppercase; margin-bottom:18px; letter-spacing:1px; }
@@ -135,7 +129,7 @@ function buildHTML(shots) {
 </head>
 <body>
 
-<!-- ============ PAGE 1: COVER + DECLARATION ============ -->
+<!-- ============ PAGE 1: COVER ============ -->
 <div class="page">
 <div class="cover">
   <div>
@@ -153,7 +147,7 @@ function buildHTML(shots) {
   <div class="submit-wrap">
     <div>
       <h4>Submitted by:</h4>
-      ${STUDENTS.map((s) => `<p><strong>${s.name}</strong><br/>${s.reg}</p>`).join("")}
+      ${STUDENTS.map((s) => `<p><strong>${s.name}</strong><br/>${s.reg}</p><br/>`).join("")}
     </div>
     <div>
       <h4>Submitted to:</h4>
@@ -169,9 +163,11 @@ function buildHTML(shots) {
     JULY 2025
   </div>
 </div>
+</div>
 
-<div class="decl">
-  <div class="decl-title">Declaration Certificate</div>
+<!-- ============ PAGE 2: DECLARATION ============ -->
+<div class="page">
+  <div class="ptitle">Declaration Certificate</div>
   <p>
     This is to certify the work presented in the Project Report in
     "<strong>Student Training Management System</strong>", in partial fulfilment of the
@@ -180,12 +176,17 @@ function buildHTML(shots) {
     by us under the supervision of <strong>Mr. S.K Ojha</strong>, Assistant Professor,
     Department of Computer Applications.
   </p>
-  <p>To the best of our knowledge, the content of this report does not form a basis for the award of any previous Degree to anyone else.</p>
-  <p>Date: ……………………….</p>
+  <p>
+    To the best of our knowledge, the content of this report does not form a basis
+    for the award of any previous Degree to anyone else.
+  </p>
+  <br/><p>Date: ……………………….</p><br/><br/>
   ${studentRows}
-  <div class="meta"><strong>Branch:</strong> Bachelor of Computer Application &nbsp;&nbsp; <strong>Semester:</strong> 6th &nbsp;&nbsp; <strong>Year:</strong> 2025–26</div>
-  <div class="sup-line">Project Supervisor</div>
-</div>
+  <div class="meta"><strong>Branch:</strong> Bachelor of Computer Application</div>
+  <div class="meta"><strong>Semester:</strong> 6th</div>
+  <div class="meta"><strong>Year:</strong> 2025–26</div>
+  <br/><br/><br/><br/>
+  <div style="border-top:1px solid #000;padding-top:6px;max-width:200px;font-size:11pt;">Project Supervisor</div>
 </div>
 
 <!-- ============ PAGE 3: CERTIFICATE OF APPROVAL ============ -->
